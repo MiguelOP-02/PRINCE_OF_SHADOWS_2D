@@ -50,14 +50,22 @@ class Jugador(pygame.sprite.Sprite):
 
         teclas = pygame.key.get_pressed()
 
+        
+        # Velocidad normal y velocidad al correr
+        velocidad_actual = VELOCIDAD_JUGADOR
+
+        if teclas[pygame.K_LSHIFT] or teclas[pygame.K_RSHIFT]:
+            velocidad_actual = VELOCIDAD_JUGADOR * 1.5
+
         movimiento_x = 0
 
         # Movimiento horizontal
         if teclas[pygame.K_LEFT] or teclas[pygame.K_a]:
-            movimiento_x = -VELOCIDAD_JUGADOR
+            movimiento_x = -velocidad_actual
 
         if teclas[pygame.K_RIGHT] or teclas[pygame.K_d]:
-            movimiento_x = VELOCIDAD_JUGADOR
+            movimiento_x = velocidad_actual
+
 
         # Saltar
         if (
