@@ -169,3 +169,51 @@ class Nivel1:
             ),
             4
         )
+        
+        # Panel de instrucciones del Nivel 1
+        panel = pygame.Surface(
+            (370, 175),
+            pygame.SRCALPHA
+        )
+
+        panel.fill((15, 20, 35, 210))
+        pantalla.blit(panel, (15, 65))
+
+        fuente_titulo = pygame.font.SysFont(
+            "arial", 22, bold=True
+        )
+
+        fuente_texto = pygame.font.SysFont(
+            "arial", 17
+        )
+
+        titulo = fuente_titulo.render(
+            "NIVEL 1 - TUTORIAL",
+            True,
+            DORADO
+        )
+
+        pantalla.blit(titulo, (30, 78))
+
+        instrucciones = [
+            "A / D o FLECHAS: Moverse",
+            "ESPACIO / W / ARRIBA: Saltar",
+            "SHIFT: Correr",
+            "Recoge monedas y evita los pinchos",
+            "Llega a la puerta dorada"
+        ]
+
+        for indice, mensaje in enumerate(instrucciones):
+            texto = fuente_texto.render(
+                mensaje,
+                True,
+                (255, 255, 255)
+            )
+
+            pantalla.blit(
+                texto,
+                (30, 112 + indice * 24)
+            )
+
+        
+
