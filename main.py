@@ -42,6 +42,11 @@ puntuacion_total = 0
 # Tiempo efectivo de juego, sin contar pausas
 tiempo_jugado = 0.0
 
+# Protección temporal después de perder una vida
+proteccion_restante = 0.0
+DURACION_PROTECCION = 1.5
+
+
 
 def crear_nivel(numero):
 
@@ -60,7 +65,7 @@ def crear_nivel(numero):
 
 
 def reiniciar_partida():
-
+    global proteccion_restante
     global numero_nivel, nivel, jugador
     global vidas, puntuacion_total
     global tiempo_jugado
@@ -92,9 +97,14 @@ def cambiar_nivel():
     jugador = Jugador(*nivel.inicio)
 
 
+
 def perder_vida():
 
     global vidas, jugador, estado
+    global proteccion_restante
+
+    if proteccion_restante > 0:
+        return
 
     vidas -= 1
 
@@ -102,6 +112,8 @@ def perder_vida():
         estado = "game_over"
     else:
         jugador = Jugador(*nivel.inicio)
+        proteccion_restante = DURACION_PROTECCION
+
 
 
 def ejecutar_boton(nombre):
@@ -130,8 +142,7 @@ def ejecutar_boton(nombre):
 
 def main():
 
-    global estado, tiempo_jugado
-
+    global estado, tiempo_jugado, proteccion_restante
     ejecutando = True
 
     while ejecutando:
@@ -190,6 +201,13 @@ def main():
         if estado == "jugando":
 
             tiempo_jugado += delta
+            
+            if proteccion_restante > 0:
+                proteccion_restante = max(
+                    0.0,
+                    proteccion_restante - delta
+                )
+
 
             jugador.actualizar(
                 nivel.plataformas
