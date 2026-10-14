@@ -1,0 +1,33 @@
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Entornos virtuales
+venv/
+.venv/
+env/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos temporales
+*.log
+*.tmp
+
+# Configuracion local
+.vscode/
+.idea/
+
+# Compilaciones
+build/
+dist/
+*.egg-info/
+
+# Variables privadas
+.env
+.env.*
+!.env.example
